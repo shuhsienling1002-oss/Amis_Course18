@@ -68,26 +68,26 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- 2. 資料庫 (Unit 18) ---
+# --- 2. 資料庫 (Unit 18 修正版) ---
 vocab_data = [
     {"amis": "Adada", "chi": "痛 / 生病", "icon": "🤕", "source": "Row 273"},
     {"amis": "Fongoh", "chi": "頭", "icon": "🤯", "source": "Unit 1"},
-    {"amis": "Tiya'", "chi": "肚子", "icon": "🤰", "source": "Unit 1"},
+    {"amis": "Tiyad", "chi": "肚子 / 腹部", "icon": "🤰", "source": "User Fix"}, # 修正拼寫
     {"amis": "Mata", "chi": "眼睛", "icon": "👁️", "source": "Unit 1"},
     {"amis": "Walis", "chi": "牙齒", "icon": "🦷", "source": "Unit 1"},
     {"amis": "Pipaisingan", "chi": "醫院", "icon": "🏥", "source": "Row 273"},
     {"amis": "Ising", "chi": "醫生", "icon": "👨‍⚕️", "source": "Row 273"},
     {"amis": "Sapaiyo", "chi": "藥", "icon": "💊", "source": "Row 3804"},
-    {"amis": "Mangiha'", "chi": "牙痛 / 呻吟", "icon": "😖", "source": "Row 5119"},
-    {"amis": "Malo'", "chi": "累", "icon": "😫", "source": "Row 245 (Var)"},
+    {"amis": "Makalim", "chi": "牙齒發酸", "icon": "😖", "source": "User Fix"}, # 修正 Mangiha' -> Makalim
+    {"amis": "Maroray", "chi": "累", "icon": "😫", "source": "User Fix"}, # 修正 Malo' -> Maroray
 ]
 
 sentences = [
     {"amis": "Adada ko fongoh.", "chi": "頭痛。", "icon": "🤯", "source": "Adada + Fongoh"},
-    {"amis": "Adada ko tiya'.", "chi": "肚子痛。", "icon": "🤰", "source": "Adada + Tiya'"},
-    {"amis": "Tayra i pipaisingan.", "chi": "去醫院。", "icon": "🏥", "source": "Row 273 (Modified)"},
-    {"amis": "Mangiha' ko wawa.", "chi": "小孩在呻吟(牙痛)。", "icon": "🦷", "source": "Row 5119"},
-    {"amis": "Komomaen to sapaiyo.", "chi": "吃藥。", "icon": "💊", "source": "Komaen + Sapaiyo"},
+    {"amis": "Adada ko tiyad.", "chi": "肚子痛。", "icon": "🤰", "source": "Adada + Tiyad"},
+    {"amis": "Tayra i pipaisingan.", "chi": "去醫院。", "icon": "🏥", "source": "Row 273"},
+    {"amis": "Makalim ko walis.", "chi": "牙齒發酸。", "icon": "🦷", "source": "User Fix"},
+    {"amis": "Komaen to sapaiyo.", "chi": "吃藥。", "icon": "💊", "source": "User Fix (Komaen)"},
 ]
 
 # --- 3. 隨機題庫 (定義) ---
@@ -100,11 +100,11 @@ raw_quiz_pool = [
         "hint": "Fongoh 是頭"
     },
     {
-        "q": "Adada ko tiya'.",
-        "audio": "Adada ko tiya'",
+        "q": "Adada ko tiyad.",
+        "audio": "Adada ko tiyad",
         "options": ["肚子痛", "眼睛痛", "腳痛"],
         "ans": "肚子痛",
-        "hint": "Tiya' 是肚子"
+        "hint": "Tiyad 是肚子"
     },
     {
         "q": "Tayra i pipaisingan.",
@@ -128,18 +128,25 @@ raw_quiz_pool = [
         "hint": "在醫院工作的人"
     },
     {
-        "q": "Mangiha' ko wawa.",
-        "audio": "Mangiha' ko wawa",
-        "options": ["小孩在呻吟(牙痛)", "小孩在睡覺", "小孩在玩耍"],
-        "ans": "小孩在呻吟(牙痛)",
-        "hint": "Mangiha' (Row 5119)"
+        "q": "Makalim ko walis.",
+        "audio": "Makalim ko walis",
+        "options": ["牙齒發酸", "牙齒痛", "牙齒掉了"],
+        "ans": "牙齒發酸",
+        "hint": "Makalim 是酸軟的感覺"
     },
     {
-        "q": "「生病/痛」的阿美語怎麼說？",
+        "q": "「累」的阿美語怎麼說？",
         "audio": None,
-        "options": ["Adada", "Lipahak", "Malo'"],
-        "ans": "Adada",
-        "hint": "Row 273: Ano adada..."
+        "options": ["Maroray", "Lipahak", "Adada"],
+        "ans": "Maroray",
+        "hint": "工作很久會覺得 Maroray"
+    },
+     {
+        "q": "Komaen to sapaiyo.",
+        "audio": "Komaen to sapaiyo",
+        "options": ["吃藥", "買藥", "看醫生"],
+        "ans": "吃藥",
+        "hint": "Komaen 是吃"
     }
 ]
 
@@ -163,7 +170,7 @@ if 'init' not in st.session_state:
 
 # --- 5. 主介面 ---
 st.markdown("<h1 style='text-align: center; color: #00796B;'>Unit 18: Adada</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #666;'>生病與身體狀態 (Health)</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #666;'>生病與身體狀態 (User Fix)</p>", unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(["📚 詞彙與句型", "🎲 隨機挑戰"])
 
@@ -212,6 +219,7 @@ with tab2:
             if st.button("🎧 播放題目音檔", key=f"btn_audio_{st.session_state.current_q_idx}"):
                 safe_play_audio(q_data['audio'])
         
+        # 使用洗牌後的選項
         unique_key = f"q_{st.session_state.quiz_id}_{st.session_state.current_q_idx}"
         user_choice = st.radio("請選擇正確答案：", q_data['shuffled_options'], key=unique_key)
         
@@ -237,6 +245,7 @@ with tab2:
         """, unsafe_allow_html=True)
         
         if st.button("🔄 再來一局 (重新抽題)", key="btn_restart"):
+            # 重置與洗牌
             st.session_state.score = 0
             st.session_state.current_q_idx = 0
             st.session_state.quiz_id = str(random.randint(1000, 9999))
