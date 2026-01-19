@@ -170,7 +170,7 @@ if 'init' not in st.session_state:
 
 # --- 5. 主介面 ---
 st.markdown("<h1 style='text-align: center; color: #00796B;'>Unit 18: Adada</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #666;'>生病與身體狀態 (User Fix)</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #666;'>生病與身體狀態</p>", unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(["📚 詞彙與句型", "🎲 隨機挑戰"])
 
@@ -260,3 +260,4 @@ with tab2:
             
             st.session_state.quiz_questions = final_qs
             safe_rerun()
+
